@@ -3,11 +3,12 @@
 @tailwind utilities;
 
 html, body, #root { height: 100%; }
-body { @apply bg-canvas text-ink font-sans text-[13px] antialiased; }
+body { @apply bg-canvas text-ink font-sans text-[13px] antialiased tracking-tight selection:bg-accent/20 selection:text-accent; }
 
-/* Scrollbars */
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-thumb { background: #cfcdc6; border-radius: 6px; }
+/* Modern Scrollbars */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
 ::-webkit-scrollbar-track { background: transparent; }
 
 /* Cytoscape canvas container */

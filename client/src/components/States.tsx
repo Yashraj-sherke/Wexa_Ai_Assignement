@@ -74,14 +74,14 @@ export function Panel({
   className?: string;
 }) {
   return (
-    <section className={`rounded-lg border border-line bg-panel ${className}`}>
+    <section className={`rounded-xl border border-line bg-panel shadow-glass ${className}`}>
       {title && (
-        <header className="flex items-center justify-between border-b border-line px-4 py-2.5">
-          <h2 className="text-[11px] font-semibold tracking-[0.08em] text-muted uppercase">{title}</h2>
+        <header className="flex items-center justify-between border-b border-line px-5 py-3">
+          <h2 className="text-[11px] font-bold tracking-widest text-muted uppercase">{title}</h2>
           {actions}
         </header>
       )}
-      <div className="p-4">{children}</div>
+      <div className="p-5">{children}</div>
     </section>
   );
 }

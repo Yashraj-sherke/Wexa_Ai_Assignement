@@ -16,10 +16,10 @@ function StatTile({ label, value, to }: { label: string; value: number | string;
   return (
     <Link
       to={to}
-      className="rounded-lg border border-line bg-panel px-4 py-3 transition-colors hover:border-accent/50 hover:bg-accent-soft/30"
+      className="group flex flex-col justify-center rounded-xl border border-line bg-panel px-5 py-4 shadow-glass transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/30 hover:shadow-glass-md hover:bg-accent/[0.02]"
     >
-      <div className="text-[10.5px] font-semibold tracking-[0.08em] text-muted uppercase">{label}</div>
-      <div className="mt-1 font-mono text-[22px] leading-none font-semibold text-ink">
+      <div className="text-[11px] font-bold tracking-widest text-muted uppercase group-hover:text-accent/80 transition-colors">{label}</div>
+      <div className="mt-2 font-mono text-[28px] leading-none font-bold text-ink">
         {value}
       </div>
     </Link>
@@ -92,11 +92,11 @@ export default function ControlCenter() {
           ) : (
             <ul className="divide-y divide-line/70">
               {highRiskAgents.slice(0, 8).map((a) => (
-                <li key={a.id}>
-                  <Link to={`/agents/${a.id}`} className="flex items-center justify-between gap-2 py-2 hover:bg-canvas/60">
+                <li key={a.id} className="group transition-colors hover:bg-canvas/80">
+                  <Link to={`/agents/${a.id}`} className="flex items-center justify-between gap-3 px-2 py-2.5">
                     <div className="min-w-0">
-                      <div className="truncate text-[12.5px] font-medium text-ink">{a.name}</div>
-                      <div className="truncate font-mono text-[10.5px] text-muted">{a.coworker}</div>
+                      <div className="truncate text-[13px] font-semibold text-ink group-hover:text-accent transition-colors">{a.name}</div>
+                      <div className="truncate font-mono text-[11px] text-muted mt-0.5">{a.coworker}</div>
                     </div>
                     <RiskBadge level={String(a.riskLevel)} />
                   </Link>
@@ -118,15 +118,15 @@ export default function ControlCenter() {
               hint="All policies are active and evaluated without conflicts."
             />
           ) : (
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {policyWarnings.map((p: Policy) => (
-                  <li key={p.id} className="flex items-start gap-2.5 rounded border border-warn/30 bg-warn-soft px-3 py-2">
-                    <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-warn" />
+                  <li key={p.id} className="group flex items-start gap-3 rounded-lg border border-warn/20 bg-warn/5 px-4 py-3 transition-all hover:bg-warn/10 hover:border-warn/30">
+                    <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-warn" />
                     <div className="min-w-0">
-                      <Link to={`/policies/${p.id}`} className="text-[12.5px] font-medium text-ink hover:text-accent">
+                      <Link to={`/policies/${p.id}`} className="text-[13px] font-semibold text-ink group-hover:text-accent transition-colors">
                         {p.name}
                       </Link>
-                      <p className="font-mono text-[10.5px] text-muted">
+                      <p className="font-mono text-[11px] text-muted mt-0.5">
                         status {p.status} · priority {numericValue(p.priority)}
                       </p>
                     </div>
@@ -155,14 +155,14 @@ export default function ControlCenter() {
           ) : (
             <ul className="divide-y divide-line/70">
               {recentActions.map((a: ActionRecord) => (
-                <li key={a.id}>
-                  <Link to={`/actions/${a.id}`} className="flex items-center justify-between gap-2 py-2 hover:bg-canvas/60">
+                <li key={a.id} className="group transition-colors hover:bg-canvas/80">
+                  <Link to={`/actions/${a.id}`} className="flex items-center justify-between gap-3 px-2 py-2.5">
                     <div className="min-w-0">
-                      <div className="truncate text-[12.5px] text-ink">
-                        <span className="font-medium">{entityName(a.agent, a.type)}</span>
+                      <div className="truncate text-[13px] text-ink">
+                        <span className="font-semibold group-hover:text-accent transition-colors">{entityName(a.agent, a.type)}</span>
                         {a.system && <span className="text-muted"> → {a.system}</span>}
                       </div>
-                      <div className="truncate font-mono text-[10.5px] text-muted">
+                      <div className="truncate font-mono text-[11px] text-muted mt-0.5">
                         {a.type} · {a.timestamp ? timeAgo(a.timestamp) : ''}
                       </div>
                     </div>

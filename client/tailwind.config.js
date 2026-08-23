@@ -4,24 +4,29 @@ export default {
   theme: {
     extend: {
       colors: {
-        canvas: '#f7f6f3',
-        panel: '#ffffff',
-        line: '#e2e0da',
-        ink: '#1c1e21',
-        muted: '#6b7075',
-        accent: '#1f5f8b',
-        'accent-soft': '#e8f0f6',
-        ok: '#2e7d4f',
-        'ok-soft': '#e9f4ed',
-        warn: '#a3670a',
-        'warn-soft': '#fbf1de',
-        bad: '#a83a32',
-        'bad-soft': '#f9ebe9',
-        graph: '#22262b'
+        canvas: '#F8FAFC',
+        panel: '#FFFFFF',
+        line: '#E2E8F0',
+        ink: '#0F172A',
+        muted: '#64748B',
+        accent: '#4F46E5',
+        'accent-soft': '#EEF2FF',
+        ok: '#059669',
+        'ok-soft': '#ECFDF5',
+        warn: '#D97706',
+        'warn-soft': '#FFFBEB',
+        bad: '#E11D48',
+        'bad-soft': '#FFF1F2',
+        graph: '#1E293B'
       },
       fontFamily: {
-        sans: ['Inter', 'IBM Plex Sans', 'Segoe UI', 'system-ui', 'sans-serif'],
-        mono: ['IBM Plex Mono', 'ui-monospace', 'SFMono-Regular', 'Consolas', 'monospace']
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      },
+      boxShadow: {
+        'glass': '0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05)',
+        'glass-md': '0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05)',
+        'glass-lg': '0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05)',
       }
     }
   },

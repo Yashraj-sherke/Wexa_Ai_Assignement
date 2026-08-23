@@ -133,52 +133,52 @@ export default function AppLayout() {
     <DbHealthContext.Provider value={{ db, refresh }}>
       <div className="flex h-full min-h-screen">
         {/* Sidebar */}
-        <aside className="flex w-52 shrink-0 flex-col border-r border-line bg-panel">
-          <Link to="/" className="flex items-center gap-2.5 border-b border-line px-4 py-3.5">
-            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-accent font-mono text-[13px] font-bold text-white">
+        <aside className="flex w-56 shrink-0 flex-col border-r border-line bg-panel shadow-[1px_0_10px_rgba(0,0,0,0.02)]">
+          <Link to="/" className="flex items-center gap-3 border-b border-line px-5 py-4 hover:bg-canvas/50 transition-colors">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent to-accent/80 font-mono text-[14px] font-bold text-white shadow-sm">
               CG
             </div>
             <div>
-              <div className="text-[13px] leading-tight font-semibold text-ink">ControlGraph</div>
-              <div className="text-[9.5px] leading-tight text-muted">Access intelligence</div>
+              <div className="text-[14px] leading-tight font-bold text-ink tracking-tight">ControlGraph</div>
+              <div className="text-[10px] leading-tight text-muted tracking-wide uppercase mt-0.5 font-medium">Access intelligence</div>
             </div>
           </Link>
-          <nav className="flex-1 overflow-y-auto py-2">
+          <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-0.5">
             {NAV.map(({ to, label, icon: Icon, end }) => (
               <NavLink
                 key={to}
                 to={to}
                 end={end}
                 className={({ isActive }) =>
-                  `flex items-center gap-2.5 border-l-2 px-4 py-[7px] text-[12.5px] ${
+                  `flex items-center gap-3 rounded-lg px-3 py-2 text-[13px] transition-all duration-200 ${
                     isActive
-                      ? 'border-accent bg-accent-soft font-medium text-accent'
-                      : 'border-transparent text-muted hover:bg-canvas hover:text-ink'
+                      ? 'bg-accent/10 font-semibold text-accent'
+                      : 'text-muted hover:bg-canvas hover:text-ink hover:translate-x-0.5'
                   }`
                 }
               >
-                <Icon className="h-3.5 w-3.5" />
+                <Icon className={`h-4 w-4 ${useLocation().pathname === to ? 'text-accent' : 'text-muted'}`} />
                 {label}
               </NavLink>
             ))}
           </nav>
-          <div className="border-t border-line p-3">
-            <div className="text-[10px] font-semibold tracking-[0.08em] text-muted uppercase">Database</div>
+          <div className="border-t border-line p-4">
+            <div className="text-[10px] font-bold tracking-widest text-muted uppercase mb-2">Database Status</div>
             <div
-              className={`mt-1.5 flex items-center gap-1.5 rounded-md border px-2 py-1.5 font-mono text-[10.5px] ${
+              className={`flex items-center gap-2 rounded-lg border px-3 py-2 font-mono text-[11px] font-medium transition-colors ${
                 db.checking
                   ? 'border-line bg-canvas text-muted'
                   : db.connected
-                    ? 'border-ok/30 bg-ok-soft text-ok'
-                    : 'border-bad/30 bg-bad-soft text-bad'
+                    ? 'border-ok/20 bg-ok-soft text-ok'
+                    : 'border-bad/20 bg-bad-soft text-bad'
               }`}
             >
               {db.checking ? (
-                <Database className="h-3 w-3 animate-pulse" />
+                <Database className="h-3.5 w-3.5 animate-pulse" />
               ) : db.connected ? (
-                <CircleCheck className="h-3 w-3" />
+                <CircleCheck className="h-3.5 w-3.5" />
               ) : (
-                <CircleX className="h-3 w-3" />
+                <CircleX className="h-3.5 w-3.5" />
               )}
               {db.checking ? 'Checking…' : db.connected ? 'CognoDB Connected' : 'Disconnected'}
             </div>
@@ -186,28 +186,30 @@ export default function AppLayout() {
         </aside>
 
         {/* Main column */}
-        <div className="flex min-w-0 flex-1 flex-col">
+        <div className="flex min-w-0 flex-1 flex-col bg-canvas/30 relative">
           <DbBanner db={db} onRetry={refresh} />
-          {/* Top bar */}
-          <header className="flex items-center gap-4 border-b border-line bg-panel px-6 py-2.5">
+          {/* Top bar with Frosted Glass */}
+          <header className="sticky top-0 z-10 flex items-center gap-4 border-b border-line bg-panel/70 px-6 py-3 backdrop-blur-md">
             <Breadcrumb />
-            <div className="ml-auto flex items-center gap-3">
-              <div className="flex items-center gap-2 rounded-md border border-line bg-canvas px-2.5 py-1 text-muted">
-                <Search className="h-3.5 w-3.5" />
+            <div className="ml-auto flex items-center gap-4">
+              <div className="flex items-center gap-2 rounded-lg border border-line bg-panel px-3 py-1.5 text-muted shadow-sm transition-all focus-within:border-accent focus-within:ring-1 focus-within:ring-accent/20">
+                <Search className="h-4 w-4" />
                 <input
                   placeholder="Search graph…"
-                  className="w-40 bg-transparent text-[12px] text-ink outline-none placeholder:text-muted/70"
+                  className="w-48 bg-transparent text-[13px] text-ink outline-none placeholder:text-muted/70"
                 />
               </div>
-              <span className="rounded border border-warn/40 bg-warn-soft px-2 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-warn">
+              <span className="flex items-center gap-1.5 rounded-full border border-warn/30 bg-warn/10 px-2.5 py-1 font-mono text-[10px] font-bold tracking-wider text-warn">
+                <span className="h-1.5 w-1.5 rounded-full bg-warn animate-pulse"></span>
                 PRODUCTION
               </span>
-              <button className="flex items-center gap-1.5 text-[12px] text-muted hover:text-ink">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-accent-soft font-mono text-[10px] font-semibold text-accent">
+              <div className="h-5 w-px bg-line mx-1"></div>
+              <button className="flex items-center gap-2.5 text-[13px] font-medium text-muted hover:text-ink transition-colors">
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-accent/10 font-mono text-[11px] font-bold text-accent border border-accent/20">
                   OP
                 </div>
                 <span className="hidden lg:inline">ops@controlgraph.io</span>
-                <ChevronDown className="h-3 w-3" />
+                <ChevronDown className="h-3.5 w-3.5 opacity-70" />
               </button>
             </div>
           </header>
