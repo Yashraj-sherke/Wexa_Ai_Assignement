@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Understand what your AI can reach before it acts.",
+  "type": "module",
   "workspaces": [
     "client",
     "server"
