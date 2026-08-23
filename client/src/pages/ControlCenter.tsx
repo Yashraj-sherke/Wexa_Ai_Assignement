@@ -66,7 +66,7 @@ export default function ControlCenter() {
       )}
 
       {/* Stat tiles */}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
         {coworkersQ.loading ? (
           Array.from({ length: 5 }).map((_, i) => <SkeletonPanel key={i} className="h-[64px]" />)
         ) : (
@@ -187,22 +187,22 @@ export default function ControlCenter() {
           <ul className="divide-y divide-line/70">
             {coworkers.map((c: Coworker) => (
               <li key={c.id}>
-                <Link to={`/coworkers/${c.id}`} className="flex items-center gap-4 py-2 hover:bg-canvas/60">
-                  <span className="w-44 truncate text-[12.5px] font-medium text-ink">{c.name}</span>
-                  <span className="w-32 truncate font-mono text-[10.5px] text-muted">{c.owner}</span>
-                  <span className="font-mono text-[10.5px] text-muted">{numericValue(c.agents)} agents · {numericValue(c.systems)} systems</span>
-                  <div className="ml-auto flex items-center gap-3">
-                    <div className="h-1.5 w-28 overflow-hidden rounded-full bg-line">
+                <Link to={`/coworkers/${c.id}`} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 py-3 hover:bg-canvas/60">
+                  <span className="w-full sm:w-44 truncate text-[13px] font-medium text-ink">{c.name}</span>
+                  <span className="w-full sm:w-32 truncate font-mono text-[11px] text-muted">{c.owner}</span>
+                  <span className="w-full sm:w-auto font-mono text-[11px] text-muted">{numericValue(c.agents)} agents · {numericValue(c.systems)} systems</span>
+                  <div className="mt-2 sm:mt-0 sm:ml-auto flex w-full sm:w-auto items-center justify-between sm:justify-end gap-3">
+                    <div className="h-1.5 flex-1 sm:w-28 overflow-hidden rounded-full bg-line">
                       <div
                         className="h-full rounded-full"
                         style={{
                           width: `${Math.min(100, Math.max(4, numericValue(c.riskScore)))}%`,
                           background:
                             ['HIGH', 'CRITICAL'].includes(String(c.riskLevel ?? '').toUpperCase())
-                              ? '#a83a32'
+                              ? '#E11D48'
                               : String(c.riskLevel ?? '').toUpperCase() === 'MEDIUM'
-                                ? '#a3670a'
-                                : '#2e7d4f',
+                                ? '#D97706'
+                                : '#059669',
                         }}
                       />
                     </div>
