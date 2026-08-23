@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "description": "Understand what your AI can reach before it acts.",
+  "workspaces": [
+    "client",
+    "server"
+  ],
   "scripts": {
     "install:all": "npm --prefix server install && npm --prefix client install",
     "seed": "npm --prefix server run seed",
@@ -10,7 +14,7 @@
     "verify": "npm --prefix server run verify",
     "dev:server": "npm --prefix server run dev",
     "dev:client": "npm --prefix client run dev",
-    "build": "npm --prefix server run build && npm --prefix client run build",
+    "build": "npm run build --workspace=client",
     "typecheck": "npm --prefix server run typecheck && npm --prefix client run typecheck",
     "test": "npm --prefix server test"
   }
